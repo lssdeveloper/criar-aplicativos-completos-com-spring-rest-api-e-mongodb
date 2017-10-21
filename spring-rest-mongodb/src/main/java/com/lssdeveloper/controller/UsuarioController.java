@@ -3,6 +3,7 @@ package com.lssdeveloper.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +20,7 @@ public class UsuarioController {
     UsuarioService usuarioService;
 
     @RequestMapping(value = "/usuario", method = RequestMethod.GET)
-    public List<Usuario> listUsuario() {
+    public List<Usuario> listar() {
         return this.usuarioService.listaUsuario();
     }
 
@@ -32,11 +33,20 @@ public class UsuarioController {
         return usuarioService.salvarUsuario(usuario);
     }
     @RequestMapping(value = "/usuario/{id}", method = RequestMethod.DELETE)
-    public void excluirUsuario(@PathVariable String id) {
+    public void deletarUsuario(@PathVariable String id) {
         usuarioService.deletarUsuario(id);
     }    
     @RequestMapping(value = "/usuario/{id}", method = RequestMethod.GET)
-    public Usuario consultarUsuario(@PathVariable String id) {
-        return usuarioService.consultarUsuario(id);
+    public Usuario getBtId(@PathVariable String id) {
+        return usuarioService.getById(id);
     } 
+    @RequestMapping(value = "/usuario/{page}/{count}", method = RequestMethod.GET)
+    public Page<Usuario> listaPaginada(@PathVariable int page, @PathVariable int count) {
+        return usuarioService.listaPaginada(page, count);
+    }
+    @RequestMapping(value = "/usuario/{nome}/nome", method = RequestMethod.GET)
+    public List<Usuario> listaPaginada(@PathVariable String nome) {
+        return usuarioService.buscarPorNome(nome);
+    }
+
 }

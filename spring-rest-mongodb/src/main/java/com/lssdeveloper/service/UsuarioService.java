@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.lssdeveloper.entity.Usuario;
@@ -29,9 +32,19 @@ public class UsuarioService {
 		
 		usuarioRepository.delete(id);		
 	}
-	public Usuario consultarUsuario(String id) {
+	public Usuario getById(String id) {
 		
 		return usuarioRepository.findOne(id);
+	}
+
+	public Page<Usuario> listaPaginada(int page, int count) {
+		Pageable pages = new PageRequest(page, count);
+		return usuarioRepository.findAll(pages);
+	}
+
+	public List<Usuario> buscarPorNome(String nome) {
+		
+		return usuarioRepository.findByNomeLikeIgnoreCase(nome);
 	}
 	
 }
