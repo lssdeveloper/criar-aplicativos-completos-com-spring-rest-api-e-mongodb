@@ -21,10 +21,17 @@ public class UsuarioService {
         return usuarioRepository.findAll();
 	}
 
-	public List<Usuario> listaUsuario(Usuario usuarioAdd) {
-
-		usuarioRepository.save(usuarioAdd);
+	public Usuario salvarUsuario(Usuario usuarioAdd) {
 		
-		return usuarioRepository.findAll();
+		return usuarioRepository.save(usuarioAdd);
 	}
+	public void deletarUsuario(String id) {
+		
+		usuarioRepository.delete(id);		
+	}
+	public Usuario consultarUsuario(String id) {
+		
+		return usuarioRepository.findOne(id);
+	}
+	
 }
