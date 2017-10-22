@@ -1,6 +1,9 @@
 package com.lssdeveloper.entity;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
@@ -10,6 +13,9 @@ public class Usuario {
 	private String id;
 	
 	private String nome;
+	
+	@DBRef
+	private List<Perfil> perfis;
 	
 	private int idade;
 	
@@ -41,6 +47,11 @@ public class Usuario {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	public List<Perfil> getPerfis() {
+		return perfis;
+	}
+	public void setPerfis(List<Perfil> perfis) {
+		this.perfis = perfis;
+	}
 	
-
 }
