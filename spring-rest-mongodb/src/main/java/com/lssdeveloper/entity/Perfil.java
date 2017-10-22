@@ -2,14 +2,22 @@ package com.lssdeveloper.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.security.core.GrantedAuthority;
 
 @Document
-public class Perfil {
+public class Perfil implements GrantedAuthority {
 	
 	@Id
 	private String id;
 	
 	private String nome;
+	
+	public Perfil() {
+		
+	}
+	public Perfil(String nome) {
+		this.nome = nome;
+	}
 
 	public String getId() {
 		return id;
@@ -25,6 +33,11 @@ public class Perfil {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	@Override
+	public String getAuthority() {		
+		return nome;
 	}
 	
 	

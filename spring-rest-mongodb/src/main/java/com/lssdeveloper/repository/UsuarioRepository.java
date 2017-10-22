@@ -9,6 +9,8 @@ import com.lssdeveloper.entity.Usuario;
 public interface UsuarioRepository extends MongoRepository<Usuario, String> {
 
     List<Usuario> findByNomeLikeIgnoreCase(String nome);
+    
+    Usuario findByEmail(String email);
 
 
 }
